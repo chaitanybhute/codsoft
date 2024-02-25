@@ -1,0 +1,56 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class NumberGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+        int maxAttempts = 5;
+        int totalAttempts = 0;
+        int totalRounds = 0;
+        
+        System.out.println("Welcome to the Number Guessing Game!");
+        
+        while (true) {
+            int secretNumber = random.nextInt(100) + 1;
+            int attempts = 0;
+            totalRounds++;
+            // System.out.println(secretNumber);
+            
+            System.out.println("\nRound " + totalRounds + ":");
+            
+            while (attempts < maxAttempts) {
+                System.out.print("Guess the number (between 1 and 100): ");
+                int guess = scanner.nextInt();
+                attempts++;
+                
+                if (guess == secretNumber) {
+                    System.out.println("Congratulations! You guessed the number " + secretNumber + " correctly in " + attempts + " attempts.");
+                    totalAttempts += attempts;
+                    break;
+                } else if (guess < secretNumber) {
+                    System.out.println("The Number Is Greater Than "+guess);
+                } else {
+                    System.out.println("The Number Is Smaller Than "+guess);
+                }
+                
+                if (attempts == maxAttempts) {
+                    System.out.println("You've used all your attempts. The correct number was " + secretNumber + ".");
+                }
+            }
+            
+            System.out.print("Do you want to play again? (yes/no): ");
+            String playAgain = scanner.next();
+            if (!playAgain.equalsIgnoreCase("yes")) {
+                break;
+            }
+        }
+        
+        System.out.println("\nThanks for playing! Your total score:");
+        System.out.println("Total Rounds: " + totalRounds);
+        System.out.println("Total Attempts: " + totalAttempts);
+        
+        scanner.close();
+    }
+}
